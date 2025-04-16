@@ -15,4 +15,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  base: '/', // Ubah menjadi '/' karena ini adalah User/Organization Page
 })
