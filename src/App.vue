@@ -9,8 +9,8 @@ const errorMessage = ref('')
 function addMemo() {
   if (!newMemo.value) {
     errorMessage.value = 'Memo can not be empty'
-    return;
-  }else {
+    return
+  } else {
     errorMessage.value = ''
   }
   memos.value.push({
@@ -21,6 +21,10 @@ function addMemo() {
   })
   newMemo.value = ''
   showForm.value = false
+}
+
+function deleteMemo(id) {
+  memos.value = memos.value.filter((memo) => memo.id !== id)
 }
 
 function getRandomColor() {
@@ -71,7 +75,10 @@ watch(showForm, async (newValue) => {
           :style="{ backgroundColor: memo.backgroundColor }"
         >
           <p class="card-content">{{ memo.content }}</p>
-          <p class="card-date">{{ memo.date }}</p>
+          <div class="card-footer">
+            <p class="card-date">{{ memo.date }}</p>
+            <button @click="deleteMemo(memo.id)" class="card-delete-btn">&times;</button>
+          </div>
         </div>
       </div>
     </div>
@@ -150,6 +157,27 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-delete-btn {
+  border: none;
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border-radius: 100%;
+  background-color: #ff6b6b;
+  color: #fff;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .form-overlay {
